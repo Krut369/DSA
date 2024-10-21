@@ -1,0 +1,113 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node* next;
+};
+
+void insertAtFront(struct Node** head){
+    int value;
+    printf("Enter the Value to be Inserted ");
+    scanf("%d",&value);
+    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->next=*head;
+    *head=newNode;
+    newNode->data=value;
+}
+
+void insertAtEnd(struct Node** head) {
+    int value;
+    printf("Enter the value to be inserted: ");
+    scanf("%d", &value);
+
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node)); // Create a new node
+    newNode->data = value;
+    newNode->next = NULL; 
+    if (*head == NULL) {
+        *head = newNode;
+        return; // Exit the function
+    }
+
+    struct Node* ptr = *head; 
+    while (ptr->next != NULL) { // Traverse until the last node
+        ptr = ptr->next; // Move to the next node
+    }
+
+    ptr->next = newNode; // Point the last node to the new node
+}
+
+void deleteAtEnd(struct Node** head) {
+    if (*head == NULL) {
+        return; // Exit the function
+    }
+
+    struct Node* ptr = *head; 
+    while (ptr->next != NULL) { // Traverse until the last node
+        ptr = ptr->next; // Move to the next node
+    }
+
+    ptr->next = NULL; // Point the last node to the new node
+}
+void Display(struct Node* head){
+    struct Node* temp=head;
+    if(head==NULL){
+        printf("List is Empty Insert Element First ");
+    }
+    while(temp!=NULL){
+        printf("%d-> ",temp->data);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+}
+void Delete(struct Node **head){
+    struct Node* temp=*head;
+    printf("%d",temp->data);
+    *head=temp->next;
+    
+    
+}
+int main(){
+    struct Node* head=NULL;
+    int choice,value;
+    // printf("Hello Linked List")
+    while(1){
+        printf("\nEnter the Choice\n");
+        printf("1 for Insert\n");
+        printf("2 for Display\n");
+        printf("3 for Delete\n");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1:
+            printf("Enter the choice\n");
+            printf("Insert at Front\n");
+            printf("Insert at Back\n");
+            printf("Insert at Any\n");
+            scanf("%d",&choice);
+            
+            switch(choice){
+                case 1:
+                    insertAtFront(&head);
+                    break;
+                case 2:
+                    insertAtEnd(&head);
+                    break;
+                
+            }
+            
+            
+            
+            break;
+            case 2:
+            Display(head);
+            break;
+            case 3:
+            // printf("Delete");
+            Delete(&head);
+            break;
+            default:
+            exit(0);
+        }
+    }
+    return 0;
+}
